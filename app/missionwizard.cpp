@@ -1,11 +1,11 @@
 #include "missionwizard.h"
 
-#include "intropage.h"
-#include "kevininfopage.h"
-#include "markinfopage.h"
-#include "missioninfopage.h"
-#include "missionacceptedpage.h"
-#include "missionrejectedpage.h"
+#include "pages/intropage.h"
+#include "pages/kevininfopage.h"
+#include "pages/markinfopage.h"
+#include "pages/missioninfopage.h"
+#include "pages/missionacceptedpage.h"
+#include "pages/missionrejectedpage.h"
 
 #include "settingsmanager.h"
 

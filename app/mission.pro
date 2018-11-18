@@ -3,24 +3,24 @@ QT += widgets multimedia
 CONFIG += c++11
 
 HEADERS = \
-          intropage.h \
-          kevininfopage.h \
-          markinfopage.h \
-          missioninfopage.h \
+          pages/intropage.h \
+          pages/kevininfopage.h \
+          pages/markinfopage.h \
+          pages/missioninfopage.h \
+          pages/missionacceptedpage.h \
+          pages/missionrejectedpage.h \
           missionwizard.h \
-          settingsmanager.h \
-    missionacceptedpage.h \
-    missionrejectedpage.h
+          settingsmanager.h
 
 SOURCES = main.cpp \
-          intropage.cpp \
-          kevininfopage.cpp \
-          markinfopage.cpp \
-          missioninfopage.cpp \
+          pages/intropage.cpp \
+          pages/kevininfopage.cpp \
+          pages/markinfopage.cpp \
+          pages/missioninfopage.cpp \
+          pages/missionacceptedpage.cpp \
+          pages/missionrejectedpage.cpp \
           missionwizard.cpp \
-          settingsmanager.cpp \
-    missionacceptedpage.cpp \
-    missionrejectedpage.cpp
+          settingsmanager.cpp
 
 wince* {
    DEPLOYMENT_PLUGIN += qjpeg qgif
