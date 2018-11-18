@@ -10,6 +10,13 @@ HEADERS = \
           pages/missionacceptedpage.h \
           pages/missionrejectedpage.h \
           missionwizard.h \
+          mainwindow.h \
+          widgets/introwidget.h \
+          widgets/kevininfowidget.h \
+          widgets/markinfowidget.h \
+          widgets/missioninfowidget.h \
+          widgets/missionacceptedwidget.h \
+          widgets/missionrejectedwidget.h \
           settingsmanager.h
 
 SOURCES = main.cpp \
@@ -20,6 +27,13 @@ SOURCES = main.cpp \
           pages/missionacceptedpage.cpp \
           pages/missionrejectedpage.cpp \
           missionwizard.cpp \
+          mainwindow.cpp \
+          widgets/introwidget.cpp \
+          widgets/kevininfowidget.cpp \
+          widgets/markinfowidget.cpp \
+          widgets/missioninfowidget.cpp \
+          widgets/missionacceptedwidget.cpp \
+          widgets/missionrejectedwidget.cpp \
           settingsmanager.cpp
 
 wince* {
