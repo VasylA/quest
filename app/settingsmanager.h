@@ -21,7 +21,6 @@ public:
 
 private:
     bool loadTimeSettings(QXmlStreamReader &reader);
-    bool loadDimentionSettings(QXmlStreamReader &reader);
 
     bool findNextStartElement(QXmlStreamReader &reader,
                               QString elementName,

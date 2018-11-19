@@ -13,6 +13,9 @@
 #include <QApplication>
 #include <QLinearGradient>
 
+
+QString MainWindow::settingsFilePath = "";
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _missionStatus(MS_Intro)
@@ -24,12 +27,28 @@ MainWindow::MainWindow(QWidget *parent)
     , _missionAcceptedWidget(new MissionAcceptedWidget)
     , _missionRejectedWidget(new MissionRejectedWidget)
 {
+    settingsFilePath = QApplication::applicationDirPath() + "/config.xml";
+
+    loadSettingsFromFile();
+
     setupWindow();
     setupWidgets();
+
+    initTimer();
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::initTimer()
+{
+    _popupTimer.setInterval(_settingsContainer.windowPopupPeriod);
+    _popupTimer.setSingleShot(true);
+
+    connect(&_popupTimer, QTimer::timeout, this, &MainWindow::popup);
+
+    _popupTimer.start(_settingsContainer.windowPopupPeriod);
 }
 
 void MainWindow::setupWindow()
@@ -226,3 +245,18 @@ void MainWindow::reactOnBackPressed()
         break;
     }
 }
+
+void MainWindow::loadSettingsFromFile()
+{
+    SettingsManager missionSettingsManager;
+    if (missionSettingsManager.loadSettings(settingsFilePath))
+        _settingsContainer = missionSettingsManager.settings();
+}
+
+void MainWindow::popup()
+{
+    show();
+
+    setWindowState(Qt::WindowMinimized);
+}
+

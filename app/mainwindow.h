@@ -40,6 +40,8 @@ public:
 
 
 private:
+    void initTimer();
+
     void setupWindow();
     void setupWidgets();
     void setupStackedWidget();
@@ -50,24 +52,35 @@ private:
     void switchToMissionAccepted();
     void switchToMissionRejected();
 
+    void loadSettingsFromFile();
+
 private slots:
+    void popup();
+
     void reactOnNextPressed();
     void reactOnBackPressed();
 
 private:
-    MissionStatus _missionStatus;
+    static QString settingsFilePath;
 
-    QStackedWidget *_stackedWidget;
 
-    IntroWidget    *_introWidget;
-    KevinInfoWidget *_kevinInfoWidget;
-    MarkInfoWidget *_markInfoWidget;
-    MissionInfoWidget *_missionInfoWidget;
-    MissionAcceptedWidget *_missionAcceptedWidget;
-    MissionRejectedWidget *_missionRejectedWidget;
+    MissionStatus _missionStatus = MS_Intro;
 
-    QPushButton    *_buttonNext;
-    QPushButton    *_buttonBack;
+    QStackedWidget *_stackedWidget = nullptr;
+
+    IntroWidget    *_introWidget = nullptr;
+    KevinInfoWidget *_kevinInfoWidget = nullptr;
+    MarkInfoWidget *_markInfoWidget = nullptr;
+    MissionInfoWidget *_missionInfoWidget = nullptr;
+    MissionAcceptedWidget *_missionAcceptedWidget = nullptr;
+    MissionRejectedWidget *_missionRejectedWidget = nullptr;
+
+    QPushButton    *_buttonNext = nullptr;
+    QPushButton    *_buttonBack = nullptr;
+
+    QTimer _popupTimer;
+
+    SettingsContainer _settingsContainer;
 };
 
 #endif // MAINWINDOW_H

@@ -54,10 +54,6 @@ bool SettingsManager::loadSettings(const QString &filePath)
         {
             isSuccess &= loadTimeSettings(reader);
         }
-        else if (reader.name() == "dimentions")
-        {
-            isSuccess &= loadDimentionSettings(reader);
-        }
     }
 
     file.close();
@@ -76,47 +72,15 @@ bool SettingsManager::loadTimeSettings(QXmlStreamReader &reader)
 
     QXmlStreamAttributes attributes = reader.attributes();
 
-    int gameTimerSecondsPeriod = 0;
-    int resetTimeSecondsPeriod = 0;
+    int windowPopupPeriod = 0;
 
-    if (attributes.hasAttribute("gameTime"))
-        gameTimerSecondsPeriod = attributes.value("gameTime").toString().toInt();
-
-    if (attributes.hasAttribute("resetTime"))
-        resetTimeSecondsPeriod = attributes.value("resetTime").toString().toInt();
+    if (attributes.hasAttribute("showWindowAfter"))
+        windowPopupPeriod = attributes.value("showWindowAfter").toString().toInt();
 
     const int millisecondsPerSecond = 1000;
 
-    if (gameTimerSecondsPeriod > 0)
-        _settings.gameTimerPeriod = gameTimerSecondsPeriod * millisecondsPerSecond;
-
-    if (resetTimeSecondsPeriod > 0)
-        _settings.gameResetPeriod = resetTimeSecondsPeriod * millisecondsPerSecond;
-
-    return true;
-}
-
-bool SettingsManager::loadDimentionSettings(QXmlStreamReader &reader)
-{
-    if (!(reader.isStartElement() && reader.name() == "dimentions"))
-        return false;
-
-    QXmlStreamAttributes attributes = reader.attributes();
-
-    int rowsCount = 0;
-    int columnsCount = 0;
-
-    if (attributes.hasAttribute("rowsCount"))
-        rowsCount = attributes.value("rowsCount").toString().toInt();
-
-    if (attributes.hasAttribute("columnsCount"))
-        columnsCount = attributes.value("columnsCount").toString().toInt();
-
-    if (rowsCount > 0)
-        _settings.rowCount = rowsCount;
-
-    if (columnsCount > 0)
-        _settings.columnCount = columnsCount;
+    if (windowPopupPeriod > 0)
+        _settings.windowPopupPeriod = windowPopupPeriod * millisecondsPerSecond;
 
     return true;
 }

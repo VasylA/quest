@@ -17,6 +17,7 @@ HEADERS = \
           widgets/missioninfowidget.h \
           widgets/missionacceptedwidget.h \
           widgets/missionrejectedwidget.h \
+          settingscontainer.h \
           settingsmanager.h
 
 SOURCES = main.cpp \
