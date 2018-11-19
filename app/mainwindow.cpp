@@ -133,6 +133,7 @@ void MainWindow::setupStackedWidget()
 
     _missionAcceptedWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     _stackedWidget->addWidget(_missionAcceptedWidget);
+    connect(_missionAcceptedWidget, &MissionAcceptedWidget::countdownFinished, this, &MainWindow::close);
 
     _missionRejectedWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     _stackedWidget->addWidget(_missionRejectedWidget);
@@ -184,6 +185,7 @@ void MainWindow::switchToMissionAccepted()
     _missionStatus = MS_MissionAccepted;
 
     _stackedWidget->setCurrentWidget(_missionAcceptedWidget);
+    _missionAcceptedWidget->launch(10);
 
     _buttonBack->hide();
     _buttonNext->hide();

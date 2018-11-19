@@ -17,6 +17,8 @@ public:
 private:
     void setupUi();
 
+    static QString markDescription;
+
     QLabel *_messageLabel;
 };
 #endif // MARKINFOWIDGET_H

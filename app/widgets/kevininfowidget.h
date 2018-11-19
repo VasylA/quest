@@ -17,6 +17,8 @@ public:
 private:
     void setupUi();
 
+    static QString kevinDescription;
+
     QLabel *_messageLabel;
 };
 

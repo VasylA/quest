@@ -40,3 +40,6 @@ SOURCES = main.cpp \
 wince* {
    DEPLOYMENT_PLUGIN += qjpeg qgif
 }
+
+RESOURCES += \
+    resources.qrc
