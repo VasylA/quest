@@ -185,7 +185,7 @@ void MainWindow::switchToMissionAccepted()
     _missionStatus = MS_MissionAccepted;
 
     _stackedWidget->setCurrentWidget(_missionAcceptedWidget);
-    _missionAcceptedWidget->launch(10);
+    _missionAcceptedWidget->launch(_settingsContainer.shutdownPeriod);
 
     _buttonBack->hide();
     _buttonNext->hide();

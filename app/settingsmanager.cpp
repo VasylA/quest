@@ -73,14 +73,21 @@ bool SettingsManager::loadTimeSettings(QXmlStreamReader &reader)
     QXmlStreamAttributes attributes = reader.attributes();
 
     int windowPopupPeriod = 0;
+    int shutdownPeriod = 0;
 
     if (attributes.hasAttribute("showWindowAfter"))
         windowPopupPeriod = attributes.value("showWindowAfter").toString().toInt();
+
+    if (attributes.hasAttribute("shutdownWindowAfter"))
+        shutdownPeriod = attributes.value("shutdownWindowAfter").toString().toInt();
 
     const int millisecondsPerSecond = 1000;
 
     if (windowPopupPeriod > 0)
         _settings.windowPopupPeriod = windowPopupPeriod * millisecondsPerSecond;
+
+    if (shutdownPeriod > 0)
+        _settings.shutdownPeriod = shutdownPeriod * millisecondsPerSecond;
 
     return true;
 }
