@@ -16,7 +16,8 @@ public:
 
 private:
     void setupUi();
+    void setupAnimationLabel();
 
-    QLabel *_messageLabel;
+    QLabel *_animationLabel = nullptr;
 };
 #endif // MISSIONREJECTEDWIDGET_H

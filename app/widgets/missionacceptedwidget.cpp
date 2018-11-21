@@ -16,11 +16,9 @@ MissionAcceptedWidget::MissionAcceptedWidget(QWidget *parent)
     setupTimer();
 }
 
-void MissionAcceptedWidget::launch(int secondsToShutdown)
+void MissionAcceptedWidget::launch(int millisecondsToShutdown)
 {
-    static const int millisecondsPerSecond = 1000;
-
-    _countdown.start(secondsToShutdown * millisecondsPerSecond); //TODO: Make configurable
+    _countdown.start(millisecondsToShutdown);
     updateTimeDisplay();
 }
 
@@ -46,7 +44,7 @@ void MissionAcceptedWidget::updateTimeDisplay()
     _remainingTimeLabel->setText(timeString);
 
     int greenChanel = 50;
-    int blueChanel = 255 * (double)millisecondsPerSecond * remainingTime / _countdown.remainingTime(); //[255-0]
+    int blueChanel = 150 * (double)millisecondsPerSecond * remainingTime / _countdown.remainingTime(); //[255-0]
     int redChanel = 255 -  blueChanel;                                                                 //[0-255]
     QColor textColor = QColor(redChanel, greenChanel, blueChanel);
 
@@ -76,10 +74,11 @@ void MissionAcceptedWidget::setupUi()
 
 void MissionAcceptedWidget::setupAnimationLabel()
 {
-    _animationLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    _animationLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     _animationLabel->setAlignment(Qt::AlignHCenter);
 
-    QMovie *movie = new QMovie(":/animation/images/giphy.gif");
+    QMovie *movie = new QMovie("://animations/mission.gif");
+    movie->setScaledSize(QSize(width(), 2 * width() / 5));
     _animationLabel->setMovie(movie);
     movie->start();
 }
@@ -89,10 +88,8 @@ void MissionAcceptedWidget::setupMessageLabel()
     _messageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     _messageLabel->setAlignment(Qt::AlignHCenter);
 
-    const int textPixelSize = height() / 10;
     QString labelText = "Це послання знищиться через";
-    QString labelHtml = QString("<p style='font-size:%0px; font-family:monospace'>%1</p>")
-            .arg(textPixelSize)
+    QString labelHtml = QString("<p style='color: green; font-size: 24px; font-family:monospace'>%1</p>")
             .arg(labelText);
 
     _messageLabel->setText(labelHtml);
@@ -105,7 +102,7 @@ void MissionAcceptedWidget::setupTimeLabel()
     _remainingTimeLabel->setAlignment(Qt::AlignHCenter);
 
     QFont labelFont = _remainingTimeLabel->font();
-    labelFont.setPixelSize(height() / 5);
+    labelFont.setPixelSize(height() / 7);
     labelFont.setBold(true);
     labelFont.setFamily("Verdana");
     _remainingTimeLabel->setFont(labelFont);
@@ -116,10 +113,8 @@ void MissionAcceptedWidget::setupGoodLuckLabel()
     _goodLuckLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     _goodLuckLabel->setAlignment(Qt::AlignHCenter);
 
-    const int textPixelSize = height() / 10;
     QString goodLuckText = "Щасти!";
-    QString goodLuckHtml = QString("<p style='font-size:%0px; font-family:monospace'>%1</p>")
-            .arg(textPixelSize)
+    QString goodLuckHtml = QString("<p style='color: green; font-size: 24px; font-family:monospace'>%1</p>")
             .arg(goodLuckText);
 
     _goodLuckLabel->setText(goodLuckHtml);

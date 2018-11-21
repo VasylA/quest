@@ -17,7 +17,7 @@ void IntroWidget::setupUi()
 
     const int textPixelSize = height() / 25;
     QString labelText = "Вам нове приватне повідомлення";
-    QString htmlText = QString("<p style='font-size:%0px; font-family:monospace'><b>%1</b></p>")
+    QString htmlText = QString("<p style='color: red; font-size:%0px; font-family:monospace'><b>%1</b></p>")
             .arg(textPixelSize)
             .arg(labelText);
 

@@ -1,30 +1,32 @@
 #include "missionrejectedwidget.h"
 
 #include <QLabel>
+#include <QMovie>
 #include <QHBoxLayout>
 
 MissionRejectedWidget::MissionRejectedWidget(QWidget *parent)
     : QWidget(parent)
-    , _messageLabel(new QLabel)
+    , _animationLabel(new QLabel)
 {
     setupUi();
 }
 
 void MissionRejectedWidget::setupUi()
 {
-    _messageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    _messageLabel->setAlignment(Qt::AlignCenter);
-
-    const int textPixelSize = height() / 10;
-    QString labelText = "Rejected";
-    QString htmlText = QString("<p style='font-size:%0px; font-family:monospace'><b>%1</b></p>")
-            .arg(textPixelSize)
-            .arg(labelText);
-
-    _messageLabel->setText(htmlText);
-    _messageLabel->setWordWrap(true);
+    setupAnimationLabel();
 
     QLayout *centralLayout = new QHBoxLayout;
-    centralLayout->addWidget(_messageLabel);
+    centralLayout->addWidget(_animationLabel);
     setLayout(centralLayout);
+}
+
+void MissionRejectedWidget::setupAnimationLabel()
+{
+    _animationLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    _animationLabel->setAlignment(Qt::AlignHCenter);
+
+    QMovie *movie = new QMovie("://animations/mouse.gif");
+    movie->setScaledSize(QSize(width(), 2 * width() / 3));
+    _animationLabel->setMovie(movie);
+    movie->start();
 }

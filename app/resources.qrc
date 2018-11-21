@@ -1,5 +1,11 @@
 <RCC>
-    <qresource prefix="/animation">
-        <file>images/giphy.gif</file>
+    <qresource prefix="/">
+        <file>images/mark-620x365.jpg</file>
+        <file>images/mark2.jpg</file>
+        <file>images/drugs.jpg</file>
+        <file>images/kevin.jpg</file>
+        <file>images/kevin-team.jpg</file>
+        <file>animations/mission.gif</file>
+        <file>animations/mouse.gif</file>
     </qresource>
 </RCC>

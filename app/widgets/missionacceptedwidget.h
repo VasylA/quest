@@ -13,7 +13,7 @@ class MissionAcceptedWidget : public QWidget
     Q_OBJECT
 public:
     explicit MissionAcceptedWidget(QWidget *parent = 0);
-    void launch(int secondsToShutdown);
+    void launch(int millisecondsToShutdown);
 
 signals:
     void countdownFinished();
