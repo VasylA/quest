@@ -56,9 +56,9 @@ void MainWindow::setupWindow()
     QLinearGradient bgGradient;
     bgGradient.setStart(0, 0);
     bgGradient.setFinalStop(0, 1);
-    bgGradient.setColorAt(0.0, QColor(150, 150, 200));
-    bgGradient.setColorAt(0.2, QColor(150, 100, 200));
-    bgGradient.setColorAt(1.0, QColor(150, 100, 150));
+    bgGradient.setColorAt(0.0, QColor(30, 30, 30));
+    bgGradient.setColorAt(0.7, QColor(30, 30, 30));
+    bgGradient.setColorAt(1.0, QColor(250, 150, 0));
     bgGradient.setCoordinateMode(QGradient::StretchToDeviceMode);
 
     QPalette colorScheme(palette());
@@ -67,13 +67,14 @@ void MainWindow::setupWindow()
     setAutoFillBackground(true);
     setPalette(colorScheme);
 
-    QSize availableScreenSize = qApp->primaryScreen()->availableSize();
-    auto width = availableScreenSize.width() / 2;
-    auto height = availableScreenSize.height() / 2;
-    auto x = width / 2;
-    auto y = height / 2;
+    QRect availableScreenRect = qApp->primaryScreen()->availableGeometry();
+    auto width = 750;
+    auto height = 550;
+    auto x = (availableScreenRect.width() - width) / 2;
+    auto y = (availableScreenRect.height() - height) / 2;
 
     setGeometry(x, y, width, height);
+    setFixedSize(width, height);
 
     setWindowTitle(tr("Захищений канал"));
 }
@@ -81,19 +82,27 @@ void MainWindow::setupWindow()
 void MainWindow::setupWidgets()
 {
     _buttonNext = new QPushButton(tr("Прочитати"));
+    _buttonNext->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 100, 0); font-weight: bold;"));
+    _buttonNext->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    _buttonNext->setMinimumSize(QSize(150, 50));
+    _buttonNext->setGeometry(this->rect().center().x() - 200, _buttonNext->y(), 150, 50);
     connect(_buttonNext, &QPushButton::clicked, this, &MainWindow::reactOnNextPressed);
 
     _buttonBack = new QPushButton(tr("Закрити"));
+    _buttonBack->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 100, 0); font-weight: bold;"));
+    _buttonBack->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    _buttonBack->setMinimumSize(QSize(150, 50));
+    _buttonBack->setGeometry(this->rect().center().x() + 200, _buttonNext->y(), 150, 50);
     connect(_buttonBack, &QPushButton::clicked, this, &MainWindow::reactOnBackPressed);
 
     QHBoxLayout *controlLayout = new QHBoxLayout;
     controlLayout->setSpacing(50);
     controlLayout->setContentsMargins(0, 0, 0, 0);
-    controlLayout->addWidget(new QSplitter(Qt::Horizontal));
+    controlLayout->addItem(new QSpacerItem(175, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
     controlLayout->addWidget(_buttonBack);
-    controlLayout->addWidget(new QSplitter(Qt::Horizontal));
+    controlLayout->addItem(new QSpacerItem(100, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
     controlLayout->addWidget(_buttonNext);
-    controlLayout->addWidget(new QSplitter(Qt::Horizontal));
+    controlLayout->addItem(new QSpacerItem(175, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
 
     QWidget *controlWidget = new QWidget;
     controlWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
@@ -231,7 +240,6 @@ void MainWindow::reactOnBackPressed()
     switch (_missionStatus)
     {
     case MS_Intro:
-    case MS_KevinInfo:
         close();
         return;
 
@@ -239,6 +247,7 @@ void MainWindow::reactOnBackPressed()
         switchToKevinInfo();
         return;
 
+    case MS_KevinInfo:
     case MS_MissionInfo:
         switchToMissionRejected();
         break;

@@ -7,7 +7,7 @@
         "<div> \
             <p><img src=\":/images/mark-620x365.jpg\" align=\"right\" width=\"300\"/></p> \
             <p style='padding-left: 50px; text-indent: 20px; text-align: left; \
-                      color: green; font-size: 20px; font-family: monospace'> \
+                      color: orange; font-size: 20px; font-family: monospace'> \
                  Брат Кевіна - Марк - широковідомий у вузьких кругах наркобарон. \
                  Є інформація, що саме в нього у лігві тримають зниклих вчених \
                  для того щоб вивідати конфіденційну державну інформацію \

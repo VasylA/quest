@@ -40,12 +40,12 @@ void MissionAcceptedWidget::updateTimeDisplay()
     else if (remainingTime == 1)
         secondsStr = "секунду";
 
-    QString timeString = QString("<p>%0 %1</p>").arg(remainingTime).arg(secondsStr);
+    QString timeString = QString("<p><b>%0</b> %1</p>").arg(remainingTime).arg(secondsStr);
     _remainingTimeLabel->setText(timeString);
 
-    int greenChanel = 50;
-    int blueChanel = 150 * (double)millisecondsPerSecond * remainingTime / _countdown.remainingTime(); //[255-0]
-    int redChanel = 255 -  blueChanel;                                                                 //[0-255]
+    int greenChanel = 150 * (double)millisecondsPerSecond * remainingTime / _countdown.remainingTime();  //[0-255]
+    int blueChanel = 0;
+    int redChanel = 255;
     QColor textColor = QColor(redChanel, greenChanel, blueChanel);
 
     QPalette colorScheme(_remainingTimeLabel->palette());
@@ -89,7 +89,7 @@ void MissionAcceptedWidget::setupMessageLabel()
     _messageLabel->setAlignment(Qt::AlignHCenter);
 
     QString labelText = "Це послання знищиться через";
-    QString labelHtml = QString("<p style='color: green; font-size: 24px; font-family:monospace'>%1</p>")
+    QString labelHtml = QString("<p style='color: orange; font-size: 24px; font-family:monospace'>%1</p>")
             .arg(labelText);
 
     _messageLabel->setText(labelHtml);
@@ -103,7 +103,6 @@ void MissionAcceptedWidget::setupTimeLabel()
 
     QFont labelFont = _remainingTimeLabel->font();
     labelFont.setPixelSize(height() / 7);
-    labelFont.setBold(true);
     labelFont.setFamily("Verdana");
     _remainingTimeLabel->setFont(labelFont);
 }
@@ -114,7 +113,7 @@ void MissionAcceptedWidget::setupGoodLuckLabel()
     _goodLuckLabel->setAlignment(Qt::AlignHCenter);
 
     QString goodLuckText = "Щасти!";
-    QString goodLuckHtml = QString("<p style='color: green; font-size: 24px; font-family:monospace'>%1</p>")
+    QString goodLuckHtml = QString("<p style='color: orange; font-size: 24px; font-family:monospace'>%1</p>")
             .arg(goodLuckText);
 
     _goodLuckLabel->setText(goodLuckHtml);

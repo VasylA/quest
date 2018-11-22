@@ -7,7 +7,7 @@ QString KevinInfoWidget::kevinDescription =
         "<div> \
             <p><img src=\"://images/kevin.jpg\" align=\"right\" width=\"180\"/></p> \
              <p style='padding-left: 50px; text-indent: 20px; text-align: left; \
-                       color: green; font-size: 20px; font-family: monospace'> \
+                       color: orange; font-size: 20px; font-family: monospace'> \
                Ваш об'єкт - Кевін Спейсі - успішний бізнесмен та плейбой. \
                Мало кому відомо, але він веде подвійне життя. Ходять чутки, \
                що ось уже 10 років він очолює злочинне угрупування під назвою \
