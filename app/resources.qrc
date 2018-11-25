@@ -7,5 +7,9 @@
         <file>images/kevin-team.jpg</file>
         <file>animations/mission.gif</file>
         <file>animations/mouse.gif</file>
+        <file>sounds/bomb_countdown.mp3</file>
+        <file>sounds/clock.mp3</file>
+        <file>sounds/main_theme.mp3</file>
+        <file>sounds/reject_sound.mp3</file>
     </qresource>
 </RCC>

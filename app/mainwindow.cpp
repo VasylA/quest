@@ -13,6 +13,9 @@
 #include <QApplication>
 #include <QLinearGradient>
 
+#include <QtMultimedia/QMediaPlayer>
+#include <QtMultimedia/QMediaPlaylist>
+
 
 QString MainWindow::settingsFilePath = "";
 
@@ -26,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     , _missionInfoWidget(new MissionInfoWidget)
     , _missionAcceptedWidget(new MissionAcceptedWidget)
     , _missionRejectedWidget(new MissionRejectedWidget)
+    , _soundPlayer(new QMediaPlayer(this))
 {
     settingsFilePath = QApplication::applicationDirPath() + "/config.xml";
 
@@ -34,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupWindow();
     setupWidgets();
 
+    initSoundPlayer();
     initTimer();
 }
 
@@ -49,6 +54,11 @@ void MainWindow::initTimer()
     connect(&_popupTimer, QTimer::timeout, this, &MainWindow::popup);
 
     _popupTimer.start(_settingsContainer.windowPopupPeriod);
+}
+
+void MainWindow::initSoundPlayer()
+{
+    _soundPlayer->setVolume(80);
 }
 
 void MainWindow::setupWindow()
@@ -161,6 +171,14 @@ void MainWindow::switchToKevinInfo()
 
     _buttonBack->setText(tr("Закрити"));
     _buttonBack->show();
+
+
+    bool isMediaPlaying = (_soundPlayer->state() == QMediaPlayer::PlayingState);
+    if (!isMediaPlaying)
+    {
+        _soundPlayer->setMedia(QUrl("qrc:/sounds/main_theme.mp3"));
+        _soundPlayer->play();
+    }
 }
 
 void MainWindow::switchToMarkInfo()
@@ -191,6 +209,8 @@ void MainWindow::switchToMissionInfo()
 
 void MainWindow::switchToMissionAccepted()
 {
+    _soundPlayer->stop();
+
     _missionStatus = MS_MissionAccepted;
 
     _stackedWidget->setCurrentWidget(_missionAcceptedWidget);
@@ -198,16 +218,25 @@ void MainWindow::switchToMissionAccepted()
 
     _buttonBack->hide();
     _buttonNext->hide();
+
+    _soundPlayer->setMedia(QUrl("qrc:/sounds/clock.mp3"));
+    _soundPlayer->play();
 }
 
 void MainWindow::switchToMissionRejected()
 {
+    _soundPlayer->stop();
+
     _missionStatus = MS_MissionRejected;
 
     _stackedWidget->setCurrentWidget(_missionRejectedWidget);
+    _missionRejectedWidget->launch(_settingsContainer.shutdownPeriod);
 
     _buttonBack->hide();
     _buttonNext->hide();
+
+    _soundPlayer->setMedia(QUrl("qrc:/sounds/reject_sound.mp3"));
+    _soundPlayer->play();
 }
 
 void MainWindow::reactOnNextPressed()

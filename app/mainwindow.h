@@ -16,7 +16,7 @@ class MissionRejectedWidget;
 QT_BEGIN_NAMESPACE
 class QStackedWidget;
 class QPushButton;
-class QLabel;
+class QMediaPlayer;
 QT_END_NAMESPACE
 
 
@@ -41,6 +41,7 @@ public:
 
 private:
     void initTimer();
+    void initSoundPlayer();
 
     void setupWindow();
     void setupWidgets();
@@ -79,6 +80,8 @@ private:
     QPushButton    *_buttonBack = nullptr;
 
     QTimer _popupTimer;
+
+    QMediaPlayer *_soundPlayer;
 
     SettingsContainer _settingsContainer;
 };
