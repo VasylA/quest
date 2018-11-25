@@ -9,6 +9,13 @@ MissionRejectedWidget::MissionRejectedWidget(QWidget *parent)
     , _animationLabel(new QLabel)
 {
     setupUi();
+
+    setupTimer();
+}
+
+void MissionRejectedWidget::launch(int millisecondsToShutdown)
+{
+    _countdown.start(millisecondsToShutdown);
 }
 
 void MissionRejectedWidget::setupUi()
@@ -29,4 +36,11 @@ void MissionRejectedWidget::setupAnimationLabel()
     movie->setScaledSize(QSize(width(), 2 * width() / 3));
     _animationLabel->setMovie(movie);
     movie->start();
+}
+
+void MissionRejectedWidget::setupTimer()
+{
+    _countdown.setSingleShot(true);
+
+    connect(&_countdown, SIGNAL(timeout()), this, SIGNAL(countdownFinished()));
 }

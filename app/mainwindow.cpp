@@ -156,6 +156,7 @@ void MainWindow::setupStackedWidget()
 
     _missionRejectedWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     _stackedWidget->addWidget(_missionRejectedWidget);
+    connect(_missionRejectedWidget, &MissionRejectedWidget::countdownFinished, this, &MainWindow::close);
 
     _stackedWidget->setCurrentWidget(_introWidget);
 }
