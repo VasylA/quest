@@ -5,7 +5,7 @@
 
 QString KevinInfoWidget::kevinDescription =
         "<div> \
-            <p><img src=\"://images/kevin.jpg\" align=\"right\" width=\"180\"/></p> \
+             <p><img src=\"://images/kevin.jpg\" align=\"right\" width=\"180\"/></p> \
              <p style='padding-left: 50px; text-indent: 20px; text-align: left; \
                        color: orange; font-size: 20px; font-family: monospace'> \
                Ваш об'єкт - Кевін Спейсі - успішний бізнесмен та плейбой. \
@@ -13,10 +13,10 @@ QString KevinInfoWidget::kevinDescription =
                що ось уже 10 років він очолює злочинне угрупування під назвою \
                Ліга Несправедливості. Ліга займається грабежем, залякуванням \
                та контрабандою. У кримінальному світі Кевін відомий як Лекс \
-               Лютер. Стало відомо, що останням часом він почав активно \
+               Лютор. Стало відомо, що останнім часом він почав активно \
                скуповувати акції Boing та інших відомих компаній. Також його \
                пов'язують з викраденням кількох вчених - працівників SpaceX, \
-               що трацюють у тактичному відділі компанії \
+               що працюють у тактичному відділі компанії. \
             </p> \
             <p><img src=\"://images/kevin-team.jpg\" align=\"left\" width=\"250\"/></p> \
         </div>";

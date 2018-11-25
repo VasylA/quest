@@ -1,5 +1,6 @@
 #include "missionacceptedwidget.h"
 
+#include <QtMath>
 #include <QLabel>
 #include <QMovie>
 #include <QHBoxLayout>
@@ -43,7 +44,10 @@ void MissionAcceptedWidget::updateTimeDisplay()
     QString timeString = QString("<p><b>%0</b> %1</p>").arg(remainingTime).arg(secondsStr);
     _remainingTimeLabel->setText(timeString);
 
-    int greenChanel = 150 * (double)millisecondsPerSecond * remainingTime / _countdown.remainingTime();  //[0-255]
+    qreal nom = (qreal)millisecondsPerSecond * remainingTime;
+    qreal den = _countdown.remainingTime();
+
+    int greenChanel = 150 * qPow(nom / den, 3.0);  //[0-255]
     int blueChanel = 0;
     int redChanel = 255;
     QColor textColor = QColor(redChanel, greenChanel, blueChanel);
